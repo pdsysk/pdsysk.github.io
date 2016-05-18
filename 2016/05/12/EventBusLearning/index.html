@@ -88,8 +88,8 @@ Subscriber：事件订阅者，接收Event
 
 接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习－－EventBus">
-<meta property="og:url" content="http://pdsysk.github.io/2016/05/12/2016-05-12-计划/index.html">
+<meta property="og:title" content="EventBus学习">
+<meta property="og:url" content="http://pdsysk.github.io/2016/05/12/EventBusLearning/index.html">
 <meta property="og:site_name" content="Shaoke Yang'Blog">
 <meta property="og:description" content="简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
 
@@ -98,9 +98,9 @@ Event:发布的事件,Post方法中为Object，说明可以为任意类型。
 Subscriber：事件订阅者，接收Event
 
 接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
-<meta property="og:updated_time" content="2016-05-18T14:33:36.211Z">
+<meta property="og:updated_time" content="2016-05-18T14:36:00.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习－－EventBus">
+<meta name="twitter:title" content="EventBus学习">
 <meta name="twitter:description" content="简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
 
 Event:发布的事件,Post方法中为Object，说明可以为任意类型。
@@ -125,7 +125,7 @@ Subscriber：事件订阅者，接收Event
   };
 </script>
 
-  <title> 学习－－EventBus | Shaoke Yang'Blog </title>
+  <title> EventBus学习 | Shaoke Yang'Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +245,7 @@ Subscriber：事件订阅者，接收Event
             
             
               
-                学习－－EventBus
+                EventBus学习
               
             
           </h1>
@@ -296,11 +296,11 @@ Subscriber：事件订阅者，接收Event
 </li>
 <li><p>Publisher:事件发布者，通过post()方法来发送事件。</p>
 <ul>
-<li>发送事件，EventBus.getDefault().post(Object event)，来进行发送。<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1></li>
+<li>发送事件，EventBus.getDefault().post(Object event)，来进行发送。</li>
 </ul>
 </li>
 </ul>
-<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>EventBus的注册类似于Android中的广播，要注意register的同时进行ungister.方法如下：</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>EventBus的注册类似于Android中的广播，要注意register的同时进行ungister.方法如下：</p>
 <pre><code>EventBus.getDefault().register(this);
 EventBus.getDefault().unregister(this);
 </code></pre><p>此段代码可以用在Activity、Fragment等的父类中，子类无需在进行注册，但是需要注意在3.0版本中需要在父类中声明一个带有注解空方法，否则如果子类中没有订阅会报找不到@Subscribe的错误，在3.0以下版本需要声明onEvent方法。</p>

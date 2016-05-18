@@ -328,8 +328,8 @@ if (parent != null) {
             
               
                 
-                <a class="post-title-link" href="/2016/05/12/2016-05-12-计划/" itemprop="url">
-                  学习－－EventBus
+                <a class="post-title-link" href="/2016/05/12/EventBusLearning/" itemprop="url">
+                  EventBus学习
                 </a>
               
             
@@ -383,11 +383,11 @@ if (parent != null) {
 </li>
 <li><p>Publisher:事件发布者，通过post()方法来发送事件。</p>
 <ul>
-<li>发送事件，EventBus.getDefault().post(Object event)，来进行发送。<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1></li>
+<li>发送事件，EventBus.getDefault().post(Object event)，来进行发送。</li>
 </ul>
 </li>
 </ul>
-<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>EventBus的注册类似于Android中的广播，要注意register的同时进行ungister.方法如下：</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>EventBus的注册类似于Android中的广播，要注意register的同时进行ungister.方法如下：</p>
 <pre><code>EventBus.getDefault().register(this);
 EventBus.getDefault().unregister(this);
 </code></pre><p>此段代码可以用在Activity、Fragment等的父类中，子类无需在进行注册，但是需要注意在3.0版本中需要在父类中声明一个带有注解空方法，否则如果子类中没有订阅会报找不到@Subscribe的错误，在3.0以下版本需要声明onEvent方法。</p>
