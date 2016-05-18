@@ -86,7 +86,7 @@ Event:发布的事件,Post方法中为Object，说明可以为任意类型。
 
 Subscriber：事件订阅者，接收Event
 
-接收事件，由onEvent开头的函数来订阅。1.1基本使用">
+接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscri">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习－－EventBus">
 <meta property="og:url" content="http://pdsysk.github.io/2016/05/12/2016-05-12-计划/index.html">
@@ -97,8 +97,8 @@ Event:发布的事件,Post方法中为Object，说明可以为任意类型。
 
 Subscriber：事件订阅者，接收Event
 
-接收事件，由onEvent开头的函数来订阅。1.1基本使用">
-<meta property="og:updated_time" content="2016-05-18T10:09:49.051Z">
+接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscri">
+<meta property="og:updated_time" content="2016-05-18T14:23:43.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习－－EventBus">
 <meta name="twitter:description" content="1.简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
@@ -107,7 +107,7 @@ Event:发布的事件,Post方法中为Object，说明可以为任意类型。
 
 Subscriber：事件订阅者，接收Event
 
-接收事件，由onEvent开头的函数来订阅。1.1基本使用">
+接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscri">
 
 
 
@@ -291,10 +291,19 @@ Subscriber：事件订阅者，接收Event
 </li>
 <li><p>Subscriber：事件订阅者，接收Event</p>
 <ul>
-<li>接收事件，由onEvent开头的函数来订阅。<h2 id="1-1基本使用"><a href="#1-1基本使用" class="headerlink" title="1.1基本使用"></a>1.1基本使用</h2></li>
+<li>接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe对方法进行注解即可订阅事件，方法名不需要以onEvent固定开头。接收方法运行线程有4中，3.0中在Annotation中的括号中以@Subscribe(threadMode = ?)来声明。threadmode有4中分别为ThreadMode.POSTING、ThreadMode.MAIN、ThreadMode.BACKGROUND、ThreadMode.ASYNC.</li>
+</ul>
+</li>
+<li><p>Publisher:事件发布者，通过post()方法来发送事件。</p>
+<ul>
+<li>发送事件，EventBus.getDefault().post(Object event)，来进行发送。<h1 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h1></li>
 </ul>
 </li>
 </ul>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>EventBus的注册类似于Android中的广播，要注意register的同时进行ungister.方法如下：</p>
+<pre><code>EventBus.getDefault().register(this);
+EventBus.getDefault().unregister(this);
+</code></pre><p>此段代码可以用在Activity、Fragment等的父类中，子类无需在进行注册，但是需要注意在3.0版本中需要在父类中声明一个带有注解空方法，否则如果子类中没有订阅会报找不到@Subscribe的错误，在3.0以下版本需要声明onEvent方法。</p>
 
       
     </div>
@@ -437,7 +446,7 @@ Subscriber：事件订阅者，接收Event
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">1.1基本使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用"><span class="nav-number">2.</span> <span class="nav-text">2.使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册"><span class="nav-number">2.1.</span> <span class="nav-text">注册</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
