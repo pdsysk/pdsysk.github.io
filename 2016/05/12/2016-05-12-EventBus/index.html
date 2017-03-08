@@ -3,14 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>2016-05-12 EventBus了解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="###简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
+Event:发布的事件,Post方法中为Object，说明可以为任意类型。
+Subscriber：事件订阅者，接收Event
+接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2016-05-12 EventBus了解">
+<meta property="og:url" content="http://yoursite.com/2016/05/12/2016-05-12-EventBus/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="###简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
+Event:发布的事件,Post方法中为Object，说明可以为任意类型。
+Subscriber：事件订阅者，接收Event
+接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
+<meta property="og:updated_time" content="2017-03-08T11:00:28.681Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="2016-05-12 EventBus了解">
+<meta name="twitter:description" content="###简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
+Event:发布的事件,Post方法中为Object，说明可以为任意类型。
+Subscriber：事件订阅者，接收Event
+接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,46 +72,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-2016-05-18-Exception" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/2016-05-18-Exception/" class="article-date">
-  <time datetime="2016-05-18T08:01:22.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/2016-05-18-Exception/">Exception--The specified child already has a parent.</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.此异常出现在对ViewPager设置Adapter的时候，在第二次设置的时候在instantiateItem函数中container调用addview，由于第二次调用意在刷新，并且该view不是new 出来的对象，由于用的是之前的view，所以在addView(view)的时候由于该view已经有parent，再次进行addview会抛出此异常。此时需要在调用addview()之前进行如下判断：<br>ViewGroup parent = (ViewGroup) view.getParent();<br>if (parent != null) {<br>            parent.removeAllViewsInLayout();<br>}<br>上段代码先判断是否有parent有的话移出所有view，然后再进行addView(view)既能解决该异常。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/2016-05-18-Exception/" data-id="cj00uspjs0000kcvntvajjrj0" class="article-share-link">Delen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2016-05-12-EventBus" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-2016-05-12-EventBus" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/12/2016-05-12-EventBus/" class="article-date">
   <time datetime="2016-05-12T10:56:57.000Z" itemprop="datePublished">2016-05-12</time>
@@ -111,8 +85,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/12/2016-05-12-EventBus/">2016-05-12 EventBus了解</a>
+    <h1 class="article-title" itemprop="name">
+      2016-05-12 EventBus了解
     </h1>
   
 
@@ -136,10 +110,23 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/18/2016-05-18-Exception/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          Exception--The specified child already has a parent.
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
   
+</article>
 
 </section>
         
