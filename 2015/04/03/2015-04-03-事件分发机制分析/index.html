@@ -6,27 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>EventBus了解 | YangShaoke&#39;Blog</title>
+  <title>事件分发机制分析 | YangShaoke&#39;Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
-Event:发布的事件,Post方法中为Object，说明可以为任意类型。
-Subscriber：事件订阅者，接收Event
-接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
-<meta property="og:type" content="article">
-<meta property="og:title" content="EventBus了解">
-<meta property="og:url" content="http://yoursite.com/2016/05/12/2016-05-12-EventBus/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="事件分发机制分析">
+<meta property="og:url" content="http://yoursite.com/2015/04/03/2015-04-03-事件分发机制分析/index.html">
 <meta property="og:site_name" content="YangShaoke'Blog">
-<meta property="og:description" content="###简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
-Event:发布的事件,Post方法中为Object，说明可以为任意类型。
-Subscriber：事件订阅者，接收Event
-接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
-<meta property="og:updated_time" content="2017-03-08T16:00:38.672Z">
+<meta property="og:updated_time" content="2017-03-08T15:59:55.154Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="EventBus了解">
-<meta name="twitter:description" content="###简介EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。
-Event:发布的事件,Post方法中为Object，说明可以为任意类型。
-Subscriber：事件订阅者，接收Event
-接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe">
+<meta name="twitter:title" content="事件分发机制分析">
   
     <link rel="alternative" href="/atom.xml" title="YangShaoke&#39;Blog" type="application/atom+xml">
   
@@ -162,33 +150,27 @@ Subscriber：事件订阅者，接收Event
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2016-05-12-EventBus" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2015-04-03-事件分发机制分析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      EventBus了解
+      事件分发机制分析
     </h1>
   
 
         
-        <a href="/2016/05/12/2016-05-12-EventBus/" class="archive-article-date">
-  	<time datetime="2016-05-12T10:56:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-12</time>
+        <a href="/2015/04/03/2015-04-03-事件分发机制分析/" class="archive-article-date">
+  	<time datetime="2015-04-03T15:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-04-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###简介<br>EventBus从字面意思来理解，事件总线。一个主要用于订阅、发布事件的总线。可以代替Intent,Handler,BroadCast在线程间传递消息。</p>
-<p>Event:发布的事件,Post方法中为Object，说明可以为任意类型。</p>
-<p>Subscriber：事件订阅者，接收Event</p>
-<p>接收事件，由onEvent开头的函数来订阅。EventBus3.0以后通过注解方式来订阅，@Subscribe对方法进行注解即可订阅事件，方法名不需要以onEvent固定开头。接收方法运行线程有4中，3.0中在Annotation中的括号中以@Subscribe(threadMode = ?)来声明。threadmode有4中分别为ThreadMode.POSTING、ThreadMode.MAIN、ThreadMode.BACKGROUND、ThreadMode.ASYNC.<br>Publisher:事件发布者，通过post()方法来发送事件。</p>
-<p>发送事件，EventBus.getDefault().post(Object event)，来进行发送。<br>使用<br>注册<br>EventBus的注册类似于Android中的广播，要注意register的同时进行ungister.方法如下：</p>
-<p>EventBus.getDefault().register(this);<br>EventBus.getDefault().unregister(this);<br>此段代码可以用在Activity、Fragment等的父类中，子类无需在进行注册，但是需要注意在3.0版本中需要在父类中声明一个带有注解空方法，否则如果子类中没有订阅会报找不到@Subscribe的错误，在3.0以下版本需要声明onEvent方法。</p>
-
+        
       
 
       
@@ -267,7 +249,7 @@ Subscriber：事件订阅者，接收Event
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2016/05/12/2016-05-12-EventBus/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2015/04/03/2015-04-03-事件分发机制分析/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -281,20 +263,15 @@ Subscriber：事件订阅者，接收Event
   
 <nav id="article-nav">
   
-    <a href="/2016/05/18/2016-05-18-Exception/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/05/12/2016-05-12-EventBus/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Exception--The specified child already has a parent.
+          EventBus了解
         
       </div>
     </a>
   
-  
-    <a href="/2015/04/03/2015-04-03-事件分发机制分析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">事件分发机制分析</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
