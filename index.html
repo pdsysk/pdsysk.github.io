@@ -284,7 +284,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="1-常见的MotionEvent"><a href="#1-常见的MotionEvent" class="headerlink" title="1.常见的MotionEvent"></a>1.常见的MotionEvent</h3><ul>
+<li>MoutionEvent.ACTION_DOWN:按下</li>
+<li>MotionEvent.ACTION_MOVE：移动</li>
+<li>MotionEvent.ACTION_UP：抬起<h3 id="2-事件的分发"><a href="#2-事件的分发" class="headerlink" title="2.事件的分发"></a>2.事件的分发</h3>事件的分发主要是View的事件分发，和ViewGroup的事件分发。</li>
+</ul>
+<h4 id="2-1-View的事件分发："><a href="#2-1-View的事件分发：" class="headerlink" title="2.1. View的事件分发："></a>2.1. View的事件分发：</h4><p>先调用dispatchTouchEvent(MotionEvent ev)方法，接下来通过源码来分析一下View的dispatchTouchEvent（）这个方法。</p>
+<pre><code>if (li != null &amp;&amp; li.mOnTouchListener != null
+    &amp;&amp; (mViewFlags &amp; ENABLED_MASK) == ENABLED
+    &amp;&amp; li.mOnTouchListener.onTouch(this, event)) {
+    result = true;
+}
+if (!result &amp;&amp; onTouchEvent(event)) {
+            result = true;
+}
+</code></pre><p>上段为View的dispatch方法中的核心代码块，通过判断条件可以看到主要分三块mOnTouchListener，ENABLED，li.mOnTouchListener.onTouch(this, event)。这三个返回true则dispatch的result返回true,则不会走下方代码块，也不会执行onTouchEvent()方法。结论：<strong>当View设置了onTouchListener方法，并且返回true，如果此View是ENABLED则不会执行onTouchEvent（）方法</strong>.如果onTouch方法返回false，则调用onTouchEvent（）方法.下面再来看一段onTouchEvent()中的代码。</p>
+<pre><code>if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||
+        (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE) ||
+        (viewFlags &amp; CONTEXT_CLICKABLE) == CONTEXT_CLICKABLE) {
+            if (mPerformClick == null) {
+                mPerformClick = new PerformClick();
+            }
+            if (!post(mPerformClick)) {
+                performClick();
+            }
+    return true;
+}
+</code></pre><p>通过这段代码可知如果没有设置onTouchListener或者返回false，在onTouchEvent()将会return true消耗掉此次事件，并且由上段代码可以看出PerformClick为对View点击事件的响应监听，由此可以的出结论：<strong>事件的触发顺序是先执行onTouch再执行onClick,并且如果onTouch返回true则将不会再执行onclick事件，返回false才会执行onclick。</strong></p>
+<p>由上可以看出View事件分发的顺序为：</p>
+<ol>
+<li>dispatchTouchEvent–&gt;onTouchListener–&gt;return false–&gt;onTouchEvent().</li>
+<li>如果View为disable则不执行onTouchlistener,执行onTouchEvent()</li>
+<li>onTouchEvent如果可点击出发onclick返回true消耗此次事件。</li>
+</ol>
+<h4 id="2-2-ViewGroup-View的事件分发"><a href="#2-2-ViewGroup-View的事件分发" class="headerlink" title="2.2 ViewGroup+View的事件分发"></a>2.2 ViewGroup+View的事件分发</h4><p>跟View不同，ViewGroup跟touch的方法多了一个onInterceptTouchEvent()。并且执行顺序为dispatchTouchEvent(分发)–onInterceptTouchEvent(拦截)–onTouchEvent(处理)。</p>
+<blockquote>
+<p>事件分发：public boolean dispatchTouchEvent(MotionEvent ev)</p>
+</blockquote>
+<ul>
+<li>return true:表示该View消费掉了事件</li>
+<li>return false:交由上层控件onTouchEvent进行处理</li>
+<li>return super:调用本层onInterceptTouchEvent()方法</li>
+</ul>
+<p>结论：<strong>不管viewGroup返回true或者false事件都不会向下进行分发，区别在于true直接消费掉，false交由上层处理，只响应了ACTION_DOWN</strong></p>
+<blockquote>
+<p>事件拦截：public boolean onInterceptTouchEvent(MotionEvent ev)</p>
+</blockquote>
+<ul>
+<li>return true:拦截此次事件，将事件交给onTouchEvent()进行处理</li>
+<li>return false:不拦截，将此次事件传递给子控件，由子控件的dispatchTouchEvent进行处理</li>
+<li>return super:和返回false一样，讲事件传递给子控件</li>
+</ul>
+<blockquote>
+<p>事件处理：public boolean onTouchEvent(MotionEvent ev)</p>
+</blockquote>
+<ul>
+<li>return true:响应事件。</li>
+<li>return false:不响应，交由上层控件的onTouchEvent</li>
+<li>return super.duspatchTouchEvent(ev),同false。</li>
+</ul>
+
       
 
       
